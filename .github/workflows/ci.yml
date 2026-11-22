@@ -1,0 +1,23 @@
+name: ci
+on:
+  push:
+    branches: [main, "feat/**"]
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python: ["3.9", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - run: python -m unittest discover -s tests -v
+      - name: Scanner runs on fixtures (exit 1 expected: hits found)
+        run: |
+          python bitpanda_migrate_scan.py tests/fixtures > out.txt || test $? -eq 1
+          grep -q "GET /v1/portfolio" out.txt
