@@ -17,7 +17,7 @@ jobs:
         with:
           python-version: ${{ matrix.python }}
       - run: python -m unittest discover -s tests -v
-      - name: Scanner runs on fixtures (exit 1 expected: hits found)
+      - name: "Scanner runs on fixtures (exit 1 means hits found)"
         run: |
           python bitpanda_migrate_scan.py tests/fixtures > out.txt || test $? -eq 1
           grep -q "GET /v1/portfolio" out.txt
