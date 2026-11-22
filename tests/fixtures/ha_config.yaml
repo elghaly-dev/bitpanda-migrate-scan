@@ -1,0 +1,9 @@
+sensor:
+  - platform: rest
+    name: bitpanda_fiat
+    resource: https://api.bitpanda.com/v1/fiatwallets
+    headers:
+      X-API-KEY: !secret bitpanda_key
+  - platform: rest
+    name: bitpanda_ticker
+    resource: https://api.bitpanda.com/v1/ticker
