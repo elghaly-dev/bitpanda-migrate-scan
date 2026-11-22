@@ -59,4 +59,4 @@ python3 -m unittest discover -s tests -v
 ```
 
 Fixtures in `tests/fixtures` are known-answer samples (Apps Script, Home Assistant YAML, Python).
-CI runs them on Python 3.9 and 3.12.
+CI runs them on Python 3.10 and 3.13.
